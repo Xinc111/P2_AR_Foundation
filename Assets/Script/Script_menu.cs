@@ -16,11 +16,6 @@ public class Script_menu : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
-    public void OnGameExitPress()
-    {
-        Application.Quit();
-    }
-
     public void OnGamePausePress() {
         bool isPaused = !pauseUI.activeSelf;
         pauseUI.SetActive(isPaused);
