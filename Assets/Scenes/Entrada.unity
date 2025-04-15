@@ -406,9 +406,9 @@ MonoBehaviour:
           m_StringArgument: Nivel1
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 1257041037}
-        m_TargetAssemblyTypeName: UnityEngine.AudioSource, UnityEngine
-        m_MethodName: Play
+      - m_Target: {fileID: 2112736304}
+        m_TargetAssemblyTypeName: AudioManager, Assembly-CSharp
+        m_MethodName: PlaySFX
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1801,7 +1801,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -14, y: 0}
+  m_AnchoredPosition: {x: 6, y: -3}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &485130734
@@ -1833,8 +1833,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 4293848814
+  m_fontColor: {r: 0.93333334, g: 0.93333334, b: 0.93333334, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -1851,8 +1851,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 100
-  m_fontSizeBase: 100
+  m_fontSize: 60
+  m_fontSizeBase: 60
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -1887,7 +1887,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: -133.11745, y: -17.915918, z: -148.37317, w: -38.09626}
+  m_margin: {x: -31.333588, y: -8.874529, z: -29.404022, w: -1.5746863}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -2346,7 +2346,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &599345491
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2671,8 +2671,8 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
       - m_Target: {fileID: 2112736304}
-        m_TargetAssemblyTypeName: OptionsMenu, Assembly-CSharp
-        m_MethodName: PlayButtonSound
+        m_TargetAssemblyTypeName: AudioManager, Assembly-CSharp
+        m_MethodName: PlaySFX
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3033,8 +3033,8 @@ RectTransform:
   m_GameObject: {fileID: 764986058}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.09, y: 0.06, z: 0.15}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 0.19, y: 0.12666665, z: 0.31666666}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 1309506643}
   m_Father: {fileID: 599345493}
@@ -3042,7 +3042,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: -11, y: 40.4}
-  m_SizeDelta: {x: 645, y: 820}
+  m_SizeDelta: {x: 433, y: 109}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &764986060
 MonoBehaviour:
@@ -3089,8 +3089,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 2112736304}
-        m_TargetAssemblyTypeName: OptionsMenu, Assembly-CSharp
-        m_MethodName: PlayButtonSound
+        m_TargetAssemblyTypeName: AudioManager, Assembly-CSharp
+        m_MethodName: PlaySFX
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3100,7 +3100,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 2112736304}
+      - m_Target: {fileID: 1877517006}
         m_TargetAssemblyTypeName: OptionsMenu, Assembly-CSharp
         m_MethodName: ToggleMusic
         m_Mode: 1
@@ -3132,7 +3132,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 14e11a039e32dfa4397bd2ed9c61452b, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 136f6b5b945cca24ca3bd089b538c87b, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -6432,7 +6432,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -14, y: 0}
+  m_AnchoredPosition: {x: 3, y: -1}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1309506644
@@ -6464,8 +6464,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 4293848814
+  m_fontColor: {r: 0.9339623, g: 0.9339623, b: 0.9339623, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -6482,8 +6482,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 100
-  m_fontSizeBase: 100
+  m_fontSize: 60
+  m_fontSizeBase: 60
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -6518,7 +6518,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: -133.11745, y: -17.915918, z: -148.37317, w: -38.09626}
+  m_margin: {x: -23.38427, y: -8.859041, z: -24.428795, w: -3.1689014}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -7754,8 +7754,8 @@ RectTransform:
   m_GameObject: {fileID: 1572001341}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.09, y: 0.06, z: 0.15}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 0.19, y: 0.12666665, z: 0.31666666}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 485130733}
   m_Father: {fileID: 599345493}
@@ -7763,7 +7763,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 20.400002, y: 19.099997}
-  m_SizeDelta: {x: 645, y: 820}
+  m_SizeDelta: {x: 433, y: 109}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1572001343
 MonoBehaviour:
@@ -7810,8 +7810,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 2112736304}
-        m_TargetAssemblyTypeName: OptionsMenu, Assembly-CSharp
-        m_MethodName: PlayButtonSound
+        m_TargetAssemblyTypeName: AudioManager, Assembly-CSharp
+        m_MethodName: PlaySFX
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -7821,7 +7821,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 2112736304}
+      - m_Target: {fileID: 1877517006}
         m_TargetAssemblyTypeName: OptionsMenu, Assembly-CSharp
         m_MethodName: ToggleSFX
         m_Mode: 1
@@ -7853,7 +7853,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 14e11a039e32dfa4397bd2ed9c61452b, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 136f6b5b945cca24ca3bd089b538c87b, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -7905,7 +7905,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -14, y: 0}
+  m_AnchoredPosition: {x: 8, y: -6}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1575811922
@@ -7937,8 +7937,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 4279111300
+  m_fontColor: {r: 0.5188679, g: 0.056292284, b: 0.056292284, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -7955,8 +7955,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 100
-  m_fontSizeBase: 100
+  m_fontSize: 60
+  m_fontSizeBase: 60
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -7991,7 +7991,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: -133.11745, y: -17.915918, z: -148.37317, w: -38.09626}
+  m_margin: {x: 28.173325, y: -13.370611, z: 22.85447, w: 1.786211}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -8435,6 +8435,7 @@ GameObject:
   - component: {fileID: 1877517002}
   - component: {fileID: 1877517001}
   - component: {fileID: 1877517005}
+  - component: {fileID: 1877517006}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -8541,6 +8542,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pauseUI: {fileID: 599345490}
+--- !u!114 &1877517006
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1877517000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c76f76584917d084ba5dd068295766d2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  musicButton: {fileID: 764986060}
+  sfxButton: {fileID: 1572001343}
+  exitButton: {fileID: 2108873661}
+  enabledColor: {r: 1, g: 1, b: 1, a: 1}
+  disabledColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
 --- !u!1 &1905935980
 GameObject:
   m_ObjectHideFlags: 0
@@ -9852,8 +9870,8 @@ RectTransform:
   m_GameObject: {fileID: 2108873659}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.09, y: 0.06, z: 0.15}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 0.19, y: 0.12666665, z: 0.31666666}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 1575811921}
   m_Father: {fileID: 599345493}
@@ -9861,7 +9879,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: -11.000001, y: -2.3000011}
-  m_SizeDelta: {x: 645, y: 820}
+  m_SizeDelta: {x: 433, y: 109}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2108873661
 MonoBehaviour:
@@ -9908,8 +9926,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 2112736304}
-        m_TargetAssemblyTypeName: OptionsMenu, Assembly-CSharp
-        m_MethodName: PlayButtonSound
+        m_TargetAssemblyTypeName: AudioManager, Assembly-CSharp
+        m_MethodName: PlaySFX
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -9939,7 +9957,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 14e11a039e32dfa4397bd2ed9c61452b, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 136f6b5b945cca24ca3bd089b538c87b, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -10000,16 +10018,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 2112736302}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c76f76584917d084ba5dd068295766d2, type: 3}
+  m_Script: {fileID: 11500000, guid: cee13183a2d59a24ca7157331ee225f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  music: {fileID: 800856111}
-  buttonSFX: {fileID: 1257041037}
-  musicButton: {fileID: 764986060}
-  sfxButton: {fileID: 1572001343}
-  exitButton: {fileID: 2108873661}
-  enabledColor: {r: 1, g: 1, b: 1, a: 1}
-  disabledColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  musicSource: {fileID: 800856111}
+  sfxSource: {fileID: 1257041037}
 --- !u!1 &2116170431
 GameObject:
   m_ObjectHideFlags: 0

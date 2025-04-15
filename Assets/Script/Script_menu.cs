@@ -11,11 +11,6 @@ public class Script_menu : MonoBehaviour
         SceneManager.LoadScene(NombreNivel);
     }
 
-    public void OnRestartPress()
-    {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-    }
-
     public void OnGamePausePress() {
         bool isPaused = !pauseUI.activeSelf;
         pauseUI.SetActive(isPaused);
