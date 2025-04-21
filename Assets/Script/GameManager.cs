@@ -10,8 +10,9 @@ public class GameManager : MonoBehaviour
     public TextMeshProUGUI countdownText;
     public GameObject gameOverCanvas;
 
-    public ARPlaneManager planeManager;           // ✅ 新增：关闭平面检测
-    public ARRaycastManager raycastManager;       // ✅ 新增：关闭点击检测
+    public ARPlaneManager planeManager;
+    public ARRaycastManager raycastManager;
+    public UITimer timerUI;  // ✅ 控制倒计时显示的脚本
 
     public float redLightDuration = 3f;
     public float greenLightDuration = 3f;
@@ -52,7 +53,11 @@ public class GameManager : MonoBehaviour
     {
         yield return StartCoroutine(StartCountdown());
 
-        DisablePlaneDetection(); // ✅ 倒计时后关闭平面检测
+        DisablePlaneDetection();
+
+        // ✅ 启动屏幕倒计时
+        if (timerUI != null)
+            timerUI.StartTimer();
 
         while (!gameEnded)
         {
@@ -82,7 +87,7 @@ public class GameManager : MonoBehaviour
     IEnumerator RedLight()
     {
         Debug.Log("🚨 Red Light!");
-        countdownText.text = "Red Light";
+        countdownText.text = "Red Light 🚫";
 
         if (dollAnimator != null)
             dollAnimator.SetBool("IsLookingAtPlayer", true);
@@ -96,9 +101,10 @@ public class GameManager : MonoBehaviour
 
         if (motionDetector.HasMoved())
         {
-            ShowGameOver("You Moved! Game Over");
+            ShowGameOver("You Moved! Game Over ❌");
             gameEnded = true;
             StopAllCoroutines();
+            if (timerUI != null) timerUI.StopTimer();
             yield break;
         }
 
@@ -108,7 +114,7 @@ public class GameManager : MonoBehaviour
     IEnumerator GreenLight()
     {
         Debug.Log("✅ Green Light!");
-        countdownText.text = "Green Light";
+        countdownText.text = "Green Light ✅";
 
         if (dollAnimator != null)
             dollAnimator.SetBool("IsLookingAtPlayer", false);
@@ -124,9 +130,26 @@ public class GameManager : MonoBehaviour
     {
         if (gameEnded) return;
 
-        ShowGameOver("You Win! You reached the doll!");
-        StopAllCoroutines();
+        ShowGameOver("You Win! 🏁 You reached the doll!");
         gameEnded = true;
+        StopAllCoroutines();
+
+        if (timerUI != null)
+            timerUI.StopTimer();
+    }
+
+    public void TriggerTimeoutFailure()
+    {
+        if (gameEnded) return;
+
+        ShowGameOver("⏰ Time's up! You failed.");
+        gameEnded = true;
+        StopAllCoroutines();
+    }
+
+    public bool IsGameEnded()
+    {
+        return gameEnded;
     }
 
     void ShowGameOver(string message)
@@ -148,7 +171,6 @@ public class GameManager : MonoBehaviour
         if (planeManager != null)
         {
             planeManager.enabled = false;
-
             foreach (var plane in planeManager.trackables)
             {
                 plane.gameObject.SetActive(false);
@@ -156,9 +178,7 @@ public class GameManager : MonoBehaviour
         }
 
         if (raycastManager != null)
-        {
             raycastManager.enabled = false;
-        }
 
         Debug.Log("🛑 Plane detection disabled after GO!");
     }
