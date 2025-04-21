@@ -87,7 +87,7 @@ public class GameManager : MonoBehaviour
     IEnumerator RedLight()
     {
         Debug.Log("🚨 Red Light!");
-        countdownText.text = "Red Light 🚫";
+        countdownText.text = "Red Light";
 
         if (dollAnimator != null)
             dollAnimator.SetBool("IsLookingAtPlayer", true);
@@ -101,7 +101,7 @@ public class GameManager : MonoBehaviour
 
         if (motionDetector.HasMoved())
         {
-            ShowGameOver("You Moved! Game Over ❌");
+            ShowGameOver("You Moved! Game Over");
             gameEnded = true;
             StopAllCoroutines();
             if (timerUI != null) timerUI.StopTimer();
@@ -114,7 +114,7 @@ public class GameManager : MonoBehaviour
     IEnumerator GreenLight()
     {
         Debug.Log("✅ Green Light!");
-        countdownText.text = "Green Light ✅";
+        countdownText.text = "Green Light";
 
         if (dollAnimator != null)
             dollAnimator.SetBool("IsLookingAtPlayer", false);
@@ -130,7 +130,7 @@ public class GameManager : MonoBehaviour
     {
         if (gameEnded) return;
 
-        ShowGameOver("You Win! 🏁 You reached the doll!");
+        ShowGameOver("You Win! You reached the doll!");
         gameEnded = true;
         StopAllCoroutines();
 
@@ -142,7 +142,7 @@ public class GameManager : MonoBehaviour
     {
         if (gameEnded) return;
 
-        ShowGameOver("⏰ Time's up! You failed.");
+        ShowGameOver("Time's up! You failed.");
         gameEnded = true;
         StopAllCoroutines();
     }
