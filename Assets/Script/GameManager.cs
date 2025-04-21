@@ -8,11 +8,14 @@ public class GameManager : MonoBehaviour
     public ARObjectPlacerWithSelection placerScript;
     public MotionDetector motionDetector;
     public TextMeshProUGUI countdownText;
-    public GameObject gameOverCanvas;
+    public GameObject victoryPanel;
+    public GameObject gameOverPanel;
+    public TextMeshProUGUI victoryMessageText;
+    public TextMeshProUGUI gameOverMessageText;
 
     public ARPlaneManager planeManager;
     public ARRaycastManager raycastManager;
-    public UITimer timerUI;  // ✅ 控制倒计时显示的脚本
+    public UITimer timerUI;
 
     public float redLightDuration = 3f;
     public float greenLightDuration = 3f;
@@ -23,18 +26,16 @@ public class GameManager : MonoBehaviour
     private bool gameStarted = false;
     private bool gameEnded = false;
 
-    private TextMeshProUGUI gameOverText;
-
     void Start()
     {
         if (countdownText != null)
             countdownText.text = "";
 
-        if (gameOverCanvas != null)
-        {
-            gameOverCanvas.SetActive(false);
-            gameOverText = gameOverCanvas.GetComponentInChildren<TextMeshProUGUI>();
-        }
+        if (victoryPanel != null)
+            victoryPanel.SetActive(false);
+
+        if (gameOverPanel != null)
+            gameOverPanel.SetActive(false);
     }
 
     void Update()
@@ -55,7 +56,6 @@ public class GameManager : MonoBehaviour
 
         DisablePlaneDetection();
 
-        // ✅ 启动屏幕倒计时
         if (timerUI != null)
             timerUI.StartTimer();
 
@@ -154,13 +154,20 @@ public class GameManager : MonoBehaviour
 
     void ShowGameOver(string message)
     {
-        countdownText.text = message;
+        countdownText.text = "";
 
-        if (gameOverCanvas != null)
+        if (victoryPanel != null) victoryPanel.SetActive(false);
+        if (gameOverPanel != null) gameOverPanel.SetActive(false);
+
+        if (message.Contains("Win"))
         {
-            gameOverCanvas.SetActive(true);
-            if (gameOverText != null)
-                gameOverText.text = message;
+            if (victoryPanel != null) victoryPanel.SetActive(true);
+            if (victoryMessageText != null) victoryMessageText.text = message;
+        }
+        else
+        {
+            if (gameOverPanel != null) gameOverPanel.SetActive(true);
+            if (gameOverMessageText != null) gameOverMessageText.text = message;
         }
 
         Debug.Log("🎯 Game Over: " + message);
