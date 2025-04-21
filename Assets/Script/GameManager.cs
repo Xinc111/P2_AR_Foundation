@@ -16,12 +16,17 @@ public class GameManager : MonoBehaviour
     public ARPlaneManager planeManager;
     public ARRaycastManager raycastManager;
     public UITimer timerUI;
+    public AudioSource gameOverSFX;
+    public AudioSource audioSource;
+
+
 
     public float redLightDuration = 3f;
     public float greenLightDuration = 3f;
 
     private GameObject placedDoll = null;
     private Animator dollAnimator = null;
+    
     private DollController dollController = null;
     private bool gameStarted = false;
     private bool gameEnded = false;
@@ -36,6 +41,9 @@ public class GameManager : MonoBehaviour
 
         if (gameOverPanel != null)
             gameOverPanel.SetActive(false);
+
+        audioSource = GetComponent<AudioSource>();
+
     }
 
     void Update()
@@ -56,18 +64,21 @@ public class GameManager : MonoBehaviour
 
         DisablePlaneDetection();
 
+        if (audioSource != null)
+            audioSource.Play(); // ✅ 开始游戏音乐
+
         if (timerUI != null)
             timerUI.StartTimer();
 
         while (!gameEnded)
         {
             yield return StartCoroutine(RedLight());
-
             if (gameEnded) yield break;
 
             yield return StartCoroutine(GreenLight());
         }
     }
+
 
     IEnumerator StartCountdown()
     {
@@ -137,6 +148,9 @@ public class GameManager : MonoBehaviour
 
         if (timerUI != null)
             timerUI.StopTimer();
+        if (audioSource != null)
+            audioSource.Stop(); // ✅ 游戏结束时关闭音乐
+
     }
 
     public void TriggerTimeoutFailure()
@@ -146,6 +160,10 @@ public class GameManager : MonoBehaviour
         ShowGameOver("Time's up! You failed.");
         gameEnded = true;
         StopAllCoroutines();
+
+        if (audioSource != null)
+            audioSource.Stop(); // ✅ 游戏结束时关闭音乐
+
     }
 
     public bool IsGameEnded()
@@ -167,10 +185,21 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            if (gameOverPanel != null) gameOverPanel.SetActive(true);
-            if (gameOverMessageText != null) gameOverMessageText.text = message;
+            if (gameOverPanel != null)
+            {
+                gameOverPanel.SetActive(true);
+                if (audioSource != null)
+                    audioSource.Stop(); // ✅ 一旦出现失败面板，就停止背景音乐
+            }
+
+            if (gameOverMessageText != null)
+                gameOverMessageText.text = message;
+
+            if (gameOverSFX != null)
+                gameOverSFX.Play(); // ✅ 播放 GameOver 音效
         }
 
+        Debug.Log("🎯 Game Over: " + message);
     }
 
     void DisablePlaneDetection()
