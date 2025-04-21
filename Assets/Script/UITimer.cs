@@ -38,6 +38,6 @@ public class UITimer : MonoBehaviour
         }
 
         if (timerText != null)
-            timerText.text = $"⏳ Time Left: {timeRemaining:F1}s";
+            timerText.text = $"Time Left: {timeRemaining:F1}s";
     }
 }

@@ -114,7 +114,6 @@ public class GameManager : MonoBehaviour
 
     IEnumerator GreenLight()
     {
-        Debug.Log("✅ Green Light!");
         countdownText.text = "Green Light";
         countdownText.color = Color.green;
 
@@ -172,7 +171,6 @@ public class GameManager : MonoBehaviour
             if (gameOverMessageText != null) gameOverMessageText.text = message;
         }
 
-        Debug.Log("🎯 Game Over: " + message);
     }
 
     void DisablePlaneDetection()
@@ -189,6 +187,5 @@ public class GameManager : MonoBehaviour
         if (raycastManager != null)
             raycastManager.enabled = false;
 
-        Debug.Log("🛑 Plane detection disabled after GO!");
     }
 }
