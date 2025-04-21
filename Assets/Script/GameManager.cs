@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
 using TMPro;
+using UnityEngine.XR.ARFoundation;
 
 public class GameManager : MonoBehaviour
 {
@@ -8,6 +9,9 @@ public class GameManager : MonoBehaviour
     public MotionDetector motionDetector;
     public TextMeshProUGUI countdownText;
     public GameObject gameOverCanvas;
+
+    public ARPlaneManager planeManager;           // ✅ 新增：关闭平面检测
+    public ARRaycastManager raycastManager;       // ✅ 新增：关闭点击检测
 
     public float redLightDuration = 3f;
     public float greenLightDuration = 3f;
@@ -48,6 +52,8 @@ public class GameManager : MonoBehaviour
     {
         yield return StartCoroutine(StartCountdown());
 
+        DisablePlaneDetection(); // ✅ 倒计时后关闭平面检测
+
         while (!gameEnded)
         {
             yield return StartCoroutine(RedLight());
@@ -76,7 +82,7 @@ public class GameManager : MonoBehaviour
     IEnumerator RedLight()
     {
         Debug.Log("🚨 Red Light!");
-        countdownText.text = "Red Light 🚫";
+        countdownText.text = "Red Light";
 
         if (dollAnimator != null)
             dollAnimator.SetBool("IsLookingAtPlayer", true);
@@ -90,7 +96,7 @@ public class GameManager : MonoBehaviour
 
         if (motionDetector.HasMoved())
         {
-            ShowGameOver("You Moved! Game Over ❌");
+            ShowGameOver("You Moved! Game Over");
             gameEnded = true;
             StopAllCoroutines();
             yield break;
@@ -102,7 +108,7 @@ public class GameManager : MonoBehaviour
     IEnumerator GreenLight()
     {
         Debug.Log("✅ Green Light!");
-        countdownText.text = "Green Light ✅";
+        countdownText.text = "Green Light";
 
         if (dollAnimator != null)
             dollAnimator.SetBool("IsLookingAtPlayer", false);
@@ -118,7 +124,7 @@ public class GameManager : MonoBehaviour
     {
         if (gameEnded) return;
 
-        ShowGameOver("You Win! 🏁 You reached the doll!");
+        ShowGameOver("You Win! You reached the doll!");
         StopAllCoroutines();
         gameEnded = true;
     }
@@ -135,5 +141,25 @@ public class GameManager : MonoBehaviour
         }
 
         Debug.Log("🎯 Game Over: " + message);
+    }
+
+    void DisablePlaneDetection()
+    {
+        if (planeManager != null)
+        {
+            planeManager.enabled = false;
+
+            foreach (var plane in planeManager.trackables)
+            {
+                plane.gameObject.SetActive(false);
+            }
+        }
+
+        if (raycastManager != null)
+        {
+            raycastManager.enabled = false;
+        }
+
+        Debug.Log("🛑 Plane detection disabled after GO!");
     }
 }
