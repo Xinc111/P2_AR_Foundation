@@ -86,8 +86,9 @@ public class GameManager : MonoBehaviour
 
     IEnumerator RedLight()
     {
-        Debug.Log("🚨 Red Light!");
+        Debug.Log("Red Light!");
         countdownText.text = "Red Light";
+        countdownText.color = Color.red;
 
         if (dollAnimator != null)
             dollAnimator.SetBool("IsLookingAtPlayer", true);
@@ -115,6 +116,7 @@ public class GameManager : MonoBehaviour
     {
         Debug.Log("✅ Green Light!");
         countdownText.text = "Green Light";
+        countdownText.color = Color.green;
 
         if (dollAnimator != null)
             dollAnimator.SetBool("IsLookingAtPlayer", false);
