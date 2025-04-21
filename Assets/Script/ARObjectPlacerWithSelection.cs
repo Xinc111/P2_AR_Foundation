@@ -9,7 +9,8 @@ public class ARObjectPlacerWithSelection : MonoBehaviour
 {
     public ARRaycastManager raycastManager;
     public Camera arCamera;
-    public GameObject defaultDollPrefab; // ✅ 默认可放的娃娃
+    public GameObject defaultDollPrefab; // ✅ 默认娃娃
+    public GameObject introductionPanel; // ✅ 介绍界面
 
     [HideInInspector] public GameObject selectedDoll;
 
@@ -19,7 +20,6 @@ public class ARObjectPlacerWithSelection : MonoBehaviour
 
     void Start()
     {
-        // 🟢 默认一打开就设置娃娃 prefab（用户还没点按钮时也能放置）
         selectedDoll = defaultDollPrefab;
     }
 
@@ -31,14 +31,14 @@ public class ARObjectPlacerWithSelection : MonoBehaviour
 
         if (touch.press.wasPressedThisFrame)
         {
-            // ⏳ 添加延迟判断（防止刚点按钮就误触）
+            // 防误触延迟
             if (Time.time < placeDelay)
             {
                 Debug.Log("⏳ 延迟中，忽略点击");
                 return;
             }
 
-            // 👆 如果点击在 UI 上，忽略放置
+            // 忽略 UI 点击
             if (EventSystem.current != null && EventSystem.current.IsPointerOverGameObject(-1))
             {
                 Debug.Log("👉 点击在 UI 上，忽略放置");
@@ -55,7 +55,7 @@ public class ARObjectPlacerWithSelection : MonoBehaviour
 
                 placedDoll = Instantiate(selectedDoll, hitPose.position, Quaternion.identity);
 
-                // 朝向摄像头
+                // 让娃娃朝向摄像头
                 Vector3 lookDirection = arCamera.transform.position - placedDoll.transform.position;
                 lookDirection.y = 0f;
                 placedDoll.transform.rotation = Quaternion.LookRotation(lookDirection);
@@ -65,11 +65,16 @@ public class ARObjectPlacerWithSelection : MonoBehaviour
         }
     }
 
-    // 👉 点击按钮选择其他娃娃时调用
+    // 🧸 玩家点击选择娃娃按钮时调用
     public void SetDollPrefab(GameObject prefab)
     {
         selectedDoll = prefab;
-        placeDelay = Time.time + 0.2f; // 延迟 0.2 秒，避免点击按钮也触发放置
+        placeDelay = Time.time + 0.2f;
+
+        // ✅ 隐藏介绍面板
+        if (introductionPanel != null)
+            introductionPanel.SetActive(false);
+
         Debug.Log("🎯 切换娃娃：" + prefab.name);
     }
 
